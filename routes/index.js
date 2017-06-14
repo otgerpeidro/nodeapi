@@ -3,7 +3,21 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  
+  const segundo = (new Date()).getSeconds();
+  res.render('index', { 
+    title: 'Express',
+    valor: '<script>alert("cuidado!")</script>',
+    condicion: {
+      segundo: segundo,
+      estado: segundo % 2 === 0
+    },
+    users: [
+      {name: 'Smith', age:20},
+      {name: 'Thomas', age:40},
+      {name: 'Jones', age:32}
+    ]
+  });
 });
 
 
@@ -36,5 +50,9 @@ router.put('/enelbody', (req, res, next) => {
   console.log('req.body', req.body);
   res.send('ok en el body');
 });
+
+
+
+
 
 module.exports = router;

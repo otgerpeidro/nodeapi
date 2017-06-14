@@ -5,7 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+require('./lib/connectMongoose');
+require('./models/Agente');
+
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,7 +35,8 @@ app.use((req, res, next) => {
 });
 
 //Rutas de nuestra aplicacion
-app.use('/', require('./routes/index'));
+app.use('/',              require('./routes/index'));
+app.use('/apiv1/agentes', require('./routes/apiv1/agentes'));
 
 
 
